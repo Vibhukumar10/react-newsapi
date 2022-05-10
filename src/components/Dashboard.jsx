@@ -37,7 +37,7 @@ export default function Dashboard() {
         <Topbar />
         <ScrollToTop smooth color="#6f00ff" />
         <SearchContainer>
-          <StyledCard>
+          <StyledCard style={{ marginBottom: '0' }}>
             <Search>
               {/* <SearchIcon /> */}
               <TextField
@@ -80,19 +80,19 @@ export default function Dashboard() {
               </center>
             </>
           )}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+            <TablePagination
+              count={data.total_hits}
+              rowsPerPage={25}
+              page={pageNum}
+              onChangePage={(e, page) => {
+                console.log(e)
+                setIsLoading(true)
+                setPageNum(page)
+              }}
+            />
+          </div>
         </GridContainer>
-        <StyledCard>
-          <TablePagination
-            count={data.total_hits}
-            rowsPerPage={25}
-            page={pageNum}
-            onChangePage={(e, page) => {
-              console.log(e)
-              setIsLoading(true)
-              setPageNum(page)
-            }}
-          />
-        </StyledCard>
       </Container>
     </>
   )
@@ -106,6 +106,7 @@ const StyledGrid = styled(Grid)`
 `
 
 const StyledCard = styled(Card)`
+  margin: 0 0 40px;
   display: flex;
   align-item: center;
   justify-content: center;
@@ -116,7 +117,7 @@ const StyledCard = styled(Card)`
 `
 
 const GridContainer = styled.div`
-  padding: 0rem 4rem 2rem;
+  padding: 0rem 4rem 4rem;
   @media (max-width: 768px) {
     padding: 0 1rem;
   }
@@ -140,7 +141,7 @@ const SearchContainer = styled.div`
   display: flex;
   align-newss: center;
   justify-content: center;
-  margin: 1rem 0;
+  margin: 1rem 0 0;
 `
 
 const ResumeText = styled.code`
