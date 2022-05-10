@@ -1,3 +1,5 @@
 # News API using React :smiley:
 
-## The app has search functionality using React based Hooks like `useState` and `useEffect`.
+## The user can search any news of their choice (default: Tesla news)
+
+### Built using React based Hooks like `useState` and `useEffect`.
