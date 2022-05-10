@@ -6,18 +6,21 @@ export default function Topbar() {
     <Header>
       {/* Icons */}
       <LogoContainer>
-        <UseIconButton
-          onClick={() => {
-            // router.push('/')
-          }}>
-          <Image
-            src="https://internshala.com/cached_uploads/logo%2F62793831bd36f1652111409.png"
-            alt="Logo"
-            width={35}
-            height={35}
-          />
-          <Text>newsAPI</Text>
-        </UseIconButton>
+        <Link href="https://react-newsapi-devcode.netlify.app/">
+          Résumé
+          <UseIconButton
+            onClick={() => {
+              // router.push('/')
+            }}>
+            <Image
+              src="https://internshala.com/cached_uploads/logo%2F62793831bd36f1652111409.png"
+              alt="Logo"
+              width={35}
+              height={35}
+            />
+            <Text>newsAPI</Text>
+          </UseIconButton>
+        </Link>
       </LogoContainer>
 
       <ResumeContainer>

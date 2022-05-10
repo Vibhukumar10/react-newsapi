@@ -25,6 +25,13 @@ export default function Dashboard() {
     setIsLoading(true)
     setSubmitQuery(query)
   }
+  useEffect(() => {
+    if (window.performance) {
+      if (performance.navigation.type === 1) {
+        window.scrollTo(0, 0)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -58,40 +65,42 @@ export default function Dashboard() {
         </SearchContainer>
         <GridContainer>
           {!isLoading ? (
-            <StyledGrid direction="row" alignItems="flex-start" container>
-              {data?.articles?.map((item) => (
-                <NewsThumbNail
-                  key={item.title}
-                  author={item.author}
-                  title={item.title}
-                  imgUrl={item.media}
-                  url={item.link}
-                  desc={item.summary}
+            <>
+              <StyledGrid direction="row" alignItems="flex-start" container>
+                {data?.articles?.map((item) => (
+                  <NewsThumbNail
+                    key={item.title}
+                    author={item.author}
+                    title={item.title}
+                    imgUrl={item.media}
+                    url={item.link}
+                    desc={item.summary}
+                  />
+                ))}
+              </StyledGrid>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                <TablePagination
+                  count={data.total_hits}
+                  rowsPerPage={25}
+                  page={pageNum}
+                  onChangePage={(e, page) => {
+                    console.log(e)
+                    setIsLoading(true)
+                    setPageNum(page)
+                  }}
                 />
-              ))}
-            </StyledGrid>
+              </div>
+            </>
           ) : (
             <>
               <center style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
                 <div>
                   <Circle color="black" size={60} />
-                  <div>{error.message}</div>
+                  <div>{error?.message}</div>
                 </div>
               </center>
             </>
           )}
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-            <TablePagination
-              count={data.total_hits}
-              rowsPerPage={25}
-              page={pageNum}
-              onChangePage={(e, page) => {
-                console.log(e)
-                setIsLoading(true)
-                setPageNum(page)
-              }}
-            />
-          </div>
         </GridContainer>
       </Container>
     </>
