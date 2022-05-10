@@ -2,8 +2,10 @@ import { Card, Grid, TextField, IconButton } from '@material-ui/core'
 import styled from 'styled-components'
 import Topbar from './Topbar'
 import { Circle } from 'better-react-spinkit'
+import TablePagination from '@material-ui/core/TablePagination'
+import ScrollToTop from 'react-scroll-to-top'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import useNews from '../hooks/useNews'
 
@@ -12,22 +14,28 @@ import NewsThumbNail from './NewsThumbNail'
 export default function Dashboard() {
   const [query, setQuery] = useState('')
   const [submitQuery, setSubmitQuery] = useState('')
-  const { data, error, isLoading } = useNews(submitQuery)
+  const [pageNum, setPageNum] = useState(0)
+  const { data, error, isLoading, setIsLoading } = useNews(submitQuery, pageNum)
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value)
   }
 
   const handleSearch = (e) => {
+    setIsLoading(true)
     setSubmitQuery(query)
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pageNum])
 
   return (
     <>
       {/*  */}
       <Container>
         <Topbar />
-
+        <ScrollToTop smooth color="#6f00ff" />
         <SearchContainer>
           <StyledCard>
             <Search>
@@ -73,6 +81,18 @@ export default function Dashboard() {
             </>
           )}
         </GridContainer>
+        <StyledCard>
+          <TablePagination
+            count={data.total_hits}
+            rowsPerPage={25}
+            page={pageNum}
+            onChangePage={(e, page) => {
+              console.log(e)
+              setIsLoading(true)
+              setPageNum(page)
+            }}
+          />
+        </StyledCard>
       </Container>
     </>
   )
