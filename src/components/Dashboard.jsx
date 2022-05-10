@@ -2,7 +2,6 @@ import { Card, Grid, TextField, IconButton } from '@material-ui/core'
 import styled from 'styled-components'
 import Topbar from './Topbar'
 
-import { Circle } from 'better-react-spinkit'
 import { useState } from 'react'
 
 import useNews from '../hooks/useNews'
@@ -12,7 +11,7 @@ import NewsThumbNail from './NewsThumbNail'
 export default function Dashboard() {
   const [query, setQuery] = useState('')
   const [submitQuery, setSubmitQuery] = useState('')
-  const { data, error, isLoading } = useNews(submitQuery)
+  const { data, isLoading } = useNews(submitQuery)
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value)
@@ -122,6 +121,7 @@ const SearchContainer = styled.div`
   margin: 1rem 0;
 `
 
+/*
 const MessageContainer = styled.div`
   display: flex;
   align-newss: center;
@@ -134,6 +134,8 @@ const WelcomeMessage = styled.div`
   text-align: center;
   color: #b2b1b9;
 `
+*/
+
 const ResumeText = styled.code`
   background-color: #4700d8;
   color: #fff;

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 export default function useSearchBook(query) {
   if (!query) {
@@ -40,6 +39,7 @@ export default function useSearchBook(query) {
         )
     }
     getNews()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
 
   // useEffect(() => {
