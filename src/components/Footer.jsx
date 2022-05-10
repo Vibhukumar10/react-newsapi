@@ -7,7 +7,7 @@ import { Link } from '@material-ui/core'
 export default function Footer() {
   return (
     <FooterContainer>
-      <Link href="https://github.com/Vibhukumar10/network-device-inventory" target="_blank">
+      <Link href="https://github.com/Vibhukumar10/react-newsapi" target="_blank">
         <StyledCodeIcon />
       </Link>
       <FooterContent>

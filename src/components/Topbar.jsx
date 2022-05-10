@@ -16,7 +16,7 @@ export default function Topbar() {
             width={35}
             height={35}
           />
-          <Text>DevCode newsAPI</Text>
+          <Text>newsAPI</Text>
         </UseIconButton>
       </LogoContainer>
 

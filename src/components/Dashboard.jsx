@@ -1,6 +1,7 @@
 import { Card, Grid, TextField, IconButton } from '@material-ui/core'
 import styled from 'styled-components'
 import Topbar from './Topbar'
+
 import { Circle } from 'better-react-spinkit'
 import { useState } from 'react'
 
@@ -50,7 +51,7 @@ export default function Dashboard() {
         </SearchContainer>
         {!isLoading ? (
           <GridContainer>
-            <StyledGrid direction="row" alignItems="center" container>
+            <StyledGrid direction="row" alignItems="flex-start" container>
               {data?.articles?.map((item) => (
                 <NewsThumbNail
                   key={item.title}
@@ -65,10 +66,10 @@ export default function Dashboard() {
           </GridContainer>
         ) : (
           <>
-            <Circle size={15} color="blue" />
-            <MessageContainer>
-              <WelcomeMessage>{error ? <>{error}</> : <></>}</WelcomeMessage>
-            </MessageContainer>
+            {/* <MessageContainer>
+              <WelcomeMessage>Loading...</WelcomeMessage>
+            </MessageContainer> */}
+            <div>Loading...</div>
           </>
         )}
       </Container>
@@ -85,7 +86,6 @@ const StyledGrid = styled(Grid)`
 
 const StyledCard = styled(Card)`
   display: flex;
-  display: flex;
   align-newss: center;
   justify-content: center;
   @media (max-width: 768px) {
@@ -95,8 +95,8 @@ const StyledCard = styled(Card)`
 `
 
 const GridContainer = styled.div`
+  margin-top: 20px;
   padding: 0 4rem;
-
   @media (max-width: 768px) {
     padding: 0 1rem;
   }
