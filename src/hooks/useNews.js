@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 export default function useSearchBook(query) {
   if (!query) {
@@ -6,55 +7,39 @@ export default function useSearchBook(query) {
   }
 
   const [data, setData] = useState([])
-  const [error, setError] = useState()
-  const [isLoading, setIsLoading] = useState(false)
-  const url = `https://newsapi.org/v2/everything?q=${query}&language=en&sortBy=publishedAt&apiKey=0f1bdcb572194395b85e8207a4d4a01a
-  `
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+
+  const options = {
+    method: 'GET',
+    url: 'https://free-news.p.rapidapi.com/v1/search',
+    params: { q: query, lang: 'en', page_size: 24 },
+    headers: {
+      'X-RapidAPI-Host': 'free-news.p.rapidapi.com',
+      'X-RapidAPI-Key': '1a0231936emshaff72195ec4a566p1f4a6ejsn963bbb1dcad6'
+    }
+  }
 
   useEffect(() => {
-    setData([])
-    const getNews = () => {
-      fetch(url)
-        .then((res) => {
-          // Unfortunately, fetch doesn't send (404 error)
-          // into the cache itself
-          // You have to send it, as I have done below
-          if (res.status >= 400) {
-            throw new Error('Server responds with error!')
-          }
-          return res.json()
-        })
-        .then(
-          (news) => {
-            setData(news)
-            setIsLoading(false)
-          },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components
-          (err) => {
-            setError(err)
-            setIsLoading(false)
-          }
-        )
-    }
-    getNews()
+    axios
+      .request(options)
+      .then((_res) => {
+        setIsLoading(true)
+        setData([])
+        console.log(_res.data)
+        setData(_res.data)
+        // setIsLoading(false)
+      })
+      .catch((error) => {
+        console.log(error.message)
+        setError(error)
+        // setIsLoading(false)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
-
-  // useEffect(() => {
-  //   axios
-  //     .get(url)
-  //     .then((_res) => {
-  //       setData([])
-  //       console.log(_res.data)
-  //       setData(_res.data)
-  //     })
-  //     .catch((error) => {
-  //       setError(error.message)
-  //     })
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [query])
 
   return { data, error, isLoading }
 }

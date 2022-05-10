@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 })
 
 const truncate = (str) => {
-  return str?.length > 75 ? str?.substring(0, 72) + '...' : str
+  return str?.length > 70 ? str?.substring(0, 67) + '...' : str
 }
 
 export default function NewsThumbNail({ url, imgUrl, title, author, desc }) {
@@ -57,34 +57,30 @@ export default function NewsThumbNail({ url, imgUrl, title, author, desc }) {
               title="Thumb Nail"
               className={classes.image}
             />
-            <Typography variant="h5" className={classes.overlay}>
-              <span
-                style={{
-                  opacity: '0.8',
-                  fontWeight: 'lighter'
-                }}>
-                {/* {title} */}
-              </span>
-            </Typography>
             <CardContent>
-              <UseTypography gutterBottom variant="h6" component="h2">
+              <UseTypography gutterBottom variant="body3" component="h2">
                 {truncate(title)}
               </UseTypography>
-              <Typography variant="body3" color="textSecondary" component="p">
-                {desc?.length > 200 ? desc?.substring(0, 197) + '...' : desc}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Author:{' '}
-                {!author
-                  ? 'Unknown'
-                  : author?.length > 25
-                  ? author?.substring(0, 23) + '...'
-                  : author}
+              <Typography variant="body2" color="textSecondary" component="h3">
+                {desc?.length > 150 ? desc?.substring(0, 147) + '...' : desc}
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions style={{ justifyContent: 'space-between', alignItems: 'center ' }}>
+          <CardActions
+            style={{ justifyContent: 'space-between', alignItems: 'center ', padding: '1rem' }}>
             {/* <LastUpdated date={timestamp} /> */}
+            <Typography
+              variant="body3"
+              color="textPrimary"
+              component="h3"
+              style={{ fontSize: '1rem' }}>
+              Author:{' '}
+              {!author
+                ? 'Unknown'
+                : author?.length > 25
+                ? author?.substring(0, 22) + '...'
+                : author}
+            </Typography>
             <IconContainer>
               <Open href={url} target="_blank">
                 <IconButton
@@ -115,7 +111,6 @@ const Open = styled.a`
 `
 
 const UseTypography = styled(Typography)`
-  font-size: 0.2rem;
   min-height: 100px;
 `
 

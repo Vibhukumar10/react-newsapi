@@ -1,6 +1,7 @@
 import { Card, Grid, TextField, IconButton } from '@material-ui/core'
 import styled from 'styled-components'
 import Topbar from './Topbar'
+import { Circle } from 'better-react-spinkit'
 
 import { useState } from 'react'
 
@@ -11,7 +12,7 @@ import NewsThumbNail from './NewsThumbNail'
 export default function Dashboard() {
   const [query, setQuery] = useState('')
   const [submitQuery, setSubmitQuery] = useState('')
-  const { data, isLoading } = useNews(submitQuery)
+  const { data, error, isLoading } = useNews(submitQuery)
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value)
@@ -47,29 +48,31 @@ export default function Dashboard() {
             </UseIconButton>
           </StyledCard>
         </SearchContainer>
-        {!isLoading ? (
-          <GridContainer>
+        <GridContainer>
+          {!isLoading ? (
             <StyledGrid direction="row" alignItems="flex-start" container>
               {data?.articles?.map((item) => (
                 <NewsThumbNail
                   key={item.title}
                   author={item.author}
                   title={item.title}
-                  imgUrl={item.urlToImage}
-                  url={item.url}
-                  desc={item.description}
+                  imgUrl={item.media}
+                  url={item.link}
+                  desc={item.summary}
                 />
               ))}
             </StyledGrid>
-          </GridContainer>
-        ) : (
-          <>
-            {/* <MessageContainer>
-              <WelcomeMessage>Loading...</WelcomeMessage>
-            </MessageContainer> */}
-            <div>Loading...</div>
-          </>
-        )}
+          ) : (
+            <>
+              <center style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
+                <div>
+                  <Circle color="black" size={60} />
+                  <div>{error.message}</div>
+                </div>
+              </center>
+            </>
+          )}
+        </GridContainer>
       </Container>
     </>
   )
@@ -84,7 +87,7 @@ const StyledGrid = styled(Grid)`
 
 const StyledCard = styled(Card)`
   display: flex;
-  align-newss: center;
+  align-item: center;
   justify-content: center;
   @media (max-width: 768px) {
     display: block;
@@ -93,8 +96,7 @@ const StyledCard = styled(Card)`
 `
 
 const GridContainer = styled.div`
-  margin-top: 20px;
-  padding: 0 4rem;
+  padding: 0rem 4rem 2rem;
   @media (max-width: 768px) {
     padding: 0 1rem;
   }
@@ -120,21 +122,6 @@ const SearchContainer = styled.div`
   justify-content: center;
   margin: 1rem 0;
 `
-
-/*
-const MessageContainer = styled.div`
-  display: flex;
-  align-newss: center;
-  justify-content: center;
-  min-height: 50vh;
-`
-
-const WelcomeMessage = styled.div`
-  padding: 2rem;
-  text-align: center;
-  color: #b2b1b9;
-`
-*/
 
 const ResumeText = styled.code`
   background-color: #4700d8;
