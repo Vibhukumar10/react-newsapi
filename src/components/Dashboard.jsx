@@ -20,7 +20,6 @@ export default function Dashboard() {
 
   const handleSearch = (e) => {
     setSubmitQuery(query)
-    e.preventDefualt()
   }
 
   return (

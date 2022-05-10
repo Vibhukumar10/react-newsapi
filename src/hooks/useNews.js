@@ -12,6 +12,7 @@ export default function useSearchBook(query) {
   const url = `https://newsapi.org/v2/everything?q=${query}&language=en&sortBy=publishedAt&apiKey=${process.env.REACT_APP_API_KEY}`
 
   useEffect(() => {
+    setData([])
     const getNews = () => {
       fetch(url)
         .then((res) => {
