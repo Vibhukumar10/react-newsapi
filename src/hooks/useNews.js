@@ -9,7 +9,8 @@ export default function useSearchBook(query) {
   const [data, setData] = useState([])
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const url = `https://newsapi.org/v2/everything?q=${query}&language=en&sortBy=publishedAt&apiKey=${process.env.REACT_APP_API_KEY}`
+  const url = `https://newsapi.org/v2/everything?q=${query}&language=en&sortBy=publishedAt&apiKey=0f1bdcb572194395b85e8207a4d4a01a
+  `
 
   useEffect(() => {
     setData([])
