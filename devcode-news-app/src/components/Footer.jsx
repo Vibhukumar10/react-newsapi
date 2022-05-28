@@ -1,40 +1,19 @@
 import styled from 'styled-components'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import CodeIcon from '@material-ui/icons/Code'
+// import GitHubIcon from '@material-ui/icons/GitHub'
+// import CodeIcon from '@material-ui/icons/Code'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
-import { Link } from '@material-ui/core'
 
 export default function Footer() {
   return (
     <FooterContainer>
-      <Link href="https://github.com/Vibhukumar10/react-newsapi" target="_blank">
-        <StyledCodeIcon />
-      </Link>
       <FooterContent>
         <StyledFiberManualRecordIcon />
-        <h5>Made by Vibhu</h5>
+        <h5>Made by Aditya</h5>
         <StyledFiberManualRecordIcon />
       </FooterContent>
-      <Link href="https://github.com/Vibhukumar10" target="_blank">
-        <StyledGitHubIcon />
-      </Link>
     </FooterContainer>
   )
 }
-
-const StyledCodeIcon = styled(CodeIcon)`
-  color: #fff;
-  position: relative;
-  top: 3px;
-  font-size: 30px !important;
-`
-
-const StyledGitHubIcon = styled(GitHubIcon)`
-  color: #fff;
-  position: relative;
-  top: 2px;
-  font-size: 24px !important;
-`
 
 const FooterContainer = styled.div`
   background-color: #4700d8;
