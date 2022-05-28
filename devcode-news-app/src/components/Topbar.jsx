@@ -22,7 +22,7 @@ export default function Topbar() {
           </UseIconButton>
         </Link>
       </LogoContainer>
-      {/* 
+
       <ResumeContainer>
         <UseIconButton>
           <ResumeText>
@@ -33,7 +33,7 @@ export default function Topbar() {
             </Link>
           </ResumeText>
         </UseIconButton>
-      </ResumeContainer> */}
+      </ResumeContainer>
     </Header>
   )
 }
@@ -46,14 +46,14 @@ const Link = styled.a`
 `
 
 const Text = styled.code``
-// const ResumeText = styled.code`
-//   background-color: #4700d8;
-//   color: #fff;
-//   padding: 2px 10px;
-//   border-radius: 4px;
-// `
+const ResumeText = styled.code`
+  background-color: #4700d8;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 4px;
+`
 
-// const ResumeContainer = styled.div``
+const ResumeContainer = styled.div``
 
 const Image = styled.img`
   margin-right: 10px;
